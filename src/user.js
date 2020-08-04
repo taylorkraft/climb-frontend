@@ -11,7 +11,7 @@ class User {
     usersDiv.innerHTML +=
     `
     <ul>
-      <h3><label>Name: </label>${this.name}</h3> 
+      <h4><label>Name: </label>${this.name}</h4>
     </ul>
     `
   }
