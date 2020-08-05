@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   usersForm()
   fetchUsers()
+  fetchMountains()
   //upon page load and every refresh my users are displayed as well as my form
 })
 
@@ -13,20 +14,17 @@ function fetchUsers() {
     // manipulate the DOM here
     // user is the backend object received
     // u represents the newly created JS object
-      // users.map(user => {
-      // let u = new User(user.name)
-      // u.renderUser()
       for (const user of users){
       let u = new User(user.id, user.name)
       u.renderUser()
       // renderUser is an instance method from User class
       // called on the new user object(u)
+
+      //our rails backend sends the users as an array (rails index)
+      //our frontend receives the array, the for loop iterates over the collection
     }
   })
 }
-  //our rails backend sends the users as an array (index method)
-  //our frontend receives the array, the for loop iterates over the collection
-
 
   function usersForm() {
     let uForm = document.getElementById("users-form")
@@ -48,7 +46,7 @@ function fetchUsers() {
     let name = document.getElementById("name").value
     // the elements in my user form were given ids
     //value gives the actual value of the input
-    
+    //prevent default from submitting the form
     let user = {
       name: name
     }
@@ -89,4 +87,23 @@ function deleteUser() {
   })
   this.location.reload()
   //'this' refers to the window, so my user doesn't have to refresh the page
+}
+
+function fetchMountains() {
+  fetch(`${BASE_URL}/mountains`)
+  .then(res => res.json())
+  .then(mountains => {
+    // manipulate the DOM here
+    // user is the backend object received
+    // u represents the newly created JS object
+      for (const mtn of mountains){
+      let m = new Mountain(mtn.id, mtn.name, mtn.elevation)
+      m.renderMountain()
+      // renderUser is an instance method from User class
+      // called on the new user object(u)
+
+      //our rails backend sends the users as an array (rails index)
+      //our frontend receives the array, the for loop iterates over the collection
+    }
+  })
 }

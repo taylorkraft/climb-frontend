@@ -1,8 +1,20 @@
 class Mountain {
-  constructor(name, elevation) {
+  constructor(id, name, elevation) {
+    this.id = id 
     this.name = name
     this.elevation = elevation
   }
 
-  //render mountain instance method
+  renderMountain() {
+    let mtnsDiv = document.getElementById("mountains-container")
+
+    mtnsDiv.innerHTML +=
+    `
+    <ul>
+      <li>${this.name}</li>
+      <li>${this.elevation}</li>
+    </ul>
+    `
+
+  }
 }

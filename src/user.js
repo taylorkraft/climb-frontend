@@ -13,7 +13,7 @@ class User {
     `
     <ul>
       <h4>${this.name}</h4>
-      <button class="delete" data-id=${this.id} onclick="deleteUser()">Delete User</button>
+      <button data-id=${this.id} onclick="deleteUser()">Delete User</button>
     </ul>
     `
     //the data-id matches the object id so i can use that to make my request
