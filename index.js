@@ -71,11 +71,22 @@ function fetchUsers() {
   })
 }
 
-let deleteButtons = document.getElementsByClassName("delete")
-// console.log(deleteButtons)
-//this returns a node list we can iterate through
-for (const button of deleteButtons){
-  button.addEventListener("click", () => {
+// let deleteButtons = document.getElementsByClassName("delete")
+// // console.log(deleteButtons)
+// //this returns a node list we can iterate through
+// for (const button of deleteButtons){
+//   button.addEventListener("click", () => {
     
+//   })
+// }
+
+function deleteUser() {
+  let userId = parseInt(event.target.dataset.id)
+  // event.target.dataset.id returns the id as a string, parseInt will turn it into an integer
+
+  fetch(`${BASE_URL}/users/${userId}`, {
+    method: "DELETE"
   })
+  this.location.reload()
+  //'this' refers to the window, so my user doesn't have to refresh the page
 }
