@@ -1,5 +1,6 @@
 class User {
-  constructor(name) {
+  constructor(id, name) {
+    this.id = id
     this.name = name
   }
 
@@ -11,8 +12,10 @@ class User {
     usersDiv.innerHTML +=
     `
     <ul>
-      <h4><label>Name: </label>${this.name}</h4>
+      <h4>${this.name}</h4>
+      <button class="delete" data-id=${this.id}>Delete User</button>
     </ul>
     `
+    //the data-id matches the object id so i can use that to make my request
   }
 }

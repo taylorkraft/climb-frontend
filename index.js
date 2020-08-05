@@ -17,7 +17,7 @@ function fetchUsers() {
       // let u = new User(user.name)
       // u.renderUser()
       for (const user of users){
-      let u = new User(user.name)
+      let u = new User(user.id, user.name)
       u.renderUser()
       // renderUser is an instance method from User class
       // called on the new user object(u)
@@ -50,10 +50,11 @@ function fetchUsers() {
     //value gives the actual value of the input
     
     let user = {
+      id: id,
       name: name
     }
     //creating my json object
-    
+
     fetch(`${BASE_URL}/users`, {
         method: "POST",
         headers: {
@@ -70,3 +71,4 @@ function fetchUsers() {
     u.renderUser()
   })
 }
+
