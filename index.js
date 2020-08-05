@@ -13,7 +13,10 @@ function fetchUsers() {
     // manipulate the DOM here
     // user is the backend object received
     // u represents the newly created JS object
-    for (const user of users){
+      // users.map(user => {
+      // let u = new User(user.name)
+      // u.renderUser()
+      for (const user of users){
       let u = new User(user.name)
       u.renderUser()
       // renderUser is an instance method from User class
@@ -36,4 +39,34 @@ function fetchUsers() {
       <input type="submit" value="Create User">
     </form>
     `
+    uForm.addEventListener("submit", submitForm)
+    //listens for submit event, takes a callback
   }
+
+  function submitForm() {
+    event.preventDefault()
+    let name = document.getElementById("name").value
+    // the elements in my user form were given ids
+    //value gives the actual value of the input
+    
+    let user = {
+      name: name
+    }
+    //creating my json object
+    
+    fetch(`${BASE_URL}/users`, {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      body: JSON.stringify(user)
+      //everything shared over the internet is shared as a string
+      //right now my user is a json object so i need to stringify
+  })
+  .then(res => res.json())
+  .then(user => {
+    let u = new User(user.id, user.name)
+    u.renderUser()
+  })
+}
