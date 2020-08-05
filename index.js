@@ -50,7 +50,6 @@ function fetchUsers() {
     //value gives the actual value of the input
     
     let user = {
-      id: id,
       name: name
     }
     //creating my json object
@@ -72,3 +71,11 @@ function fetchUsers() {
   })
 }
 
+let deleteButtons = document.getElementsByClassName("delete")
+// console.log(deleteButtons)
+//this returns a node list we can iterate through
+for (const button of deleteButtons){
+  button.addEventListener("click", () => {
+    
+  })
+}
