@@ -106,6 +106,36 @@ function fetchMountains() {
   })
 }
 
+function submitMForm() {
+  event.preventDefault()
+  let name = document.getElementById("name").value
+  let elevation = document.getElementById("elevation").value
+  // the elements in my mountain form were given ids
+  //value gives the actual value of the input
+  //prevent default from submitting the form
+  let mountain = {
+    name: name,
+    elevation: elevation
+  }
+  //creating my json object
+
+  fetch(`${BASE_URL}/mountains`, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    body: JSON.stringify(mountain)
+    //everything shared over the internet is shared as a string
+    //right now my mountain is a json object so i need to stringify
+})
+.then(res => res.json())
+.then(mtn => {
+  let m = new Mountain(mtn.id, mtn.name, mtn.elevation)
+  m.renderMountain()
+})
+}
+
 // let deleteButtons = document.getElementsByClassName("delete")
 // // console.log(deleteButtons)
 // //this returns a node list we can iterate through

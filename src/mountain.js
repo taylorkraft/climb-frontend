@@ -13,6 +13,7 @@ class Mountain {
     <ul>
       <li>${this.name}</li>
       <li>${this.elevation}</li>
+      <button data-id=${this.id} onclick="deleteMountain()">Delete Mountain</button>
     </ul>
     `
 
