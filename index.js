@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   usersForm()
   fetchUsers()
   fetchMountains()
+  mtnsForm()
   //upon page load and every refresh my users are displayed as well as my form
 })
 
@@ -26,6 +27,25 @@ function fetchUsers() {
   })
 }
 
+function fetchMountains() {
+  fetch(`${BASE_URL}/mountains`)
+  .then(res => res.json())
+  .then(mountains => {
+    // manipulate the DOM here
+    // mtn is the backend object received
+    // m represents the newly created JS object
+      for (const mtn of mountains){
+      let m = new Mountain(mtn.id, mtn.name, mtn.elevation)
+      m.renderMountain()
+      // renderMountain is an instance method from Mountain class
+      // called on the new mountain object(m)
+
+      //our rails backend sends the mountains as an array (rails index)
+      //our frontend receives the array, the for loop iterates over the collection
+    }
+  })
+}
+
   function usersForm() {
     let uForm = document.getElementById("users-form")
 
@@ -37,11 +57,28 @@ function fetchUsers() {
       <input type="submit" value="Create User">
     </form>
     `
-    uForm.addEventListener("submit", submitForm)
+    uForm.addEventListener("submit", submitUForm)
     //listens for submit event, takes a callback
   }
 
-  function submitForm() {
+  function mtnsForm() {
+    let mForm = document.getElementById("mountains-form")
+
+    mForm.innerHTML += 
+    `
+    <form>
+      <label>Name: </label>
+      <input type="text" id="name">
+      <label>Elevation: </label>
+      <input type="text" id="elevation">
+      <input type="submit" value="Create Mountain">
+    </form>
+    `
+    mForm.addEventListener("submit", submitMForm)
+
+  }
+
+  function submitUForm() {
     event.preventDefault()
     let name = document.getElementById("name").value
     // the elements in my user form were given ids
@@ -89,21 +126,3 @@ function deleteUser() {
   //'this' refers to the window, so my user doesn't have to refresh the page
 }
 
-function fetchMountains() {
-  fetch(`${BASE_URL}/mountains`)
-  .then(res => res.json())
-  .then(mountains => {
-    // manipulate the DOM here
-    // user is the backend object received
-    // u represents the newly created JS object
-      for (const mtn of mountains){
-      let m = new Mountain(mtn.id, mtn.name, mtn.elevation)
-      m.renderMountain()
-      // renderUser is an instance method from User class
-      // called on the new user object(u)
-
-      //our rails backend sends the users as an array (rails index)
-      //our frontend receives the array, the for loop iterates over the collection
-    }
-  })
-}
