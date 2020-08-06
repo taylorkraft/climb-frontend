@@ -156,3 +156,13 @@ function deleteUser() {
   //'this' refers to the window, so my user doesn't have to refresh the page
 }
 
+function deleteMountain() {
+  let mountainId = parseInt(event.target.dataset.id)
+  // event.target.dataset.id returns the id as a string, parseInt will turn it into an integer
+
+  fetch(`${BASE_URL}/mountains/${mountainId}`, {
+    method: "DELETE"
+  })
+  this.location.reload()
+  //'this' refers to the window, so my user doesn't have to refresh the page
+}
